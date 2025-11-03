@@ -30,6 +30,12 @@
             # Nix
             programs.nixfmt.enable = true;
 
+            # C-language
+            programs.clang-format.enable = true;
+            settings.formatter.clang-format.excludes = [
+              "*/gdextension/*"
+            ];
+
             # Haskell
             programs.ormolu.enable = true;
             programs.hlint.enable = true;
