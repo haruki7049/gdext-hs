@@ -19,5 +19,4 @@ foreign-library echo-hello-plugin
   include-dirs:     gdextension
   ghc-options:      -fPIC -threaded
   extra-libraries: dl
-  ld-options: -Wl,-E
   default-language: Haskell2010
