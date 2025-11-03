@@ -16,5 +16,6 @@ library
   hs-source-dirs:     src
   build-depends:      base
   include-dirs:       gdextension
+  c-sources:          cbits/flib.c
   build-tool-depends: hsc2hs:hsc2hs
   default-language:   Haskell2010
