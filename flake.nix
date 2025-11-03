@@ -60,6 +60,7 @@
               pkgs.haskell.lib.addBuildTools drv ([
                 # Build tools
                 pkgs.haskellPackages.stack
+                pkgs.haskellPackages.hsc2hs
 
                 # Linter
                 pkgs.haskellPackages.hlint

@@ -1,16 +1,29 @@
-cabal-version: 3.0
-name:          echo-hello
-version:       0.1.0.0
-license:       MIT
-author:        haruki7049
-maintainer:    tontonkirikiri@gmail.com
-build-type:    Simple
+cabal-version:      3.0
+name:               echo-hello
+version:            0.1.0.0
+license:            MIT
+author:             haruki7049
+maintainer:         tontonkirikiri@gmail.com
+build-type:         Simple
+extra-source-files: gdextension/gdextension_interface.h
 
 common warnings
   ghc-options: -Wall
 
 library
-  import:           warnings
-  hs-source-dirs:   src
-  build-depends:    base
+  import:             warnings
+  exposed-modules:    Plugin
+  hs-source-dirs:     src
+  build-depends:      base
+  include-dirs:       gdextension
+  build-tool-depends: hsc2hs:hsc2hs
+  default-language:   Haskell2010
+
+executable test-app
+  main-is:          Main.hs
+  hs-source-dirs:   app
+  build-depends:
+    , base
+    , language-c
+
   default-language: Haskell2010
