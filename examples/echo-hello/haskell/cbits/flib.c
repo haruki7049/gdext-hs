@@ -1,5 +1,17 @@
+#include "HsFFI.h"
 #include "gdextension_interface.h"
 #include <stdio.h>
+
+static void flib_init() __attribute__((constructor));
+static void flib_init() {
+  static char *argv[] = {"libecho-hello-plugin.so", "+RTS", "-N", 0},
+              **argv_ = argv;
+  static int argc = sizeof(argv) / sizeof(argv[0]) - 1;
+  hs_init(&argc, &argv_);
+}
+
+static void flib_fini() __attribute__((destructor));
+static void flib_fini() { hs_exit(); }
 
 extern void
 haskell_gdextension_init(GDExtensionInterfaceGetProcAddress p_get_proc_address,

@@ -17,4 +17,7 @@ foreign-library echo-hello-plugin
   build-depends:    base
   c-sources:        cbits/flib.c
   include-dirs:     gdextension
+  ghc-options:      -fPIC -threaded
+  extra-libraries: dl
+  ld-options: -Wl,-E
   default-language: Haskell2010
