@@ -6,7 +6,7 @@ haskell_gdextension_init(GDExtensionInterfaceGetProcAddress p_get_proc_address,
                          GDExtensionClassLibraryPtr p_library,
                          GDExtensionInitialization *r_initialization);
 
-GDExtensionBool GDE_EXPORT
+GDExtensionBool __attribute((visibility("default")))
 godot_haskell_entry(GDExtensionInterfaceGetProcAddress p_get_proc_address,
                     GDExtensionClassLibraryPtr p_library,
                     GDExtensionInitialization *r_initialization) {
