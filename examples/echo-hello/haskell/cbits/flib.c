@@ -1,4 +1,4 @@
-#include "gdextension_interface.h" // Cabal が gdextension/ から見つけます
+#include "gdextension_interface.h"
 #include <stdio.h>
 
 extern void haskell_gdextension_init(
@@ -6,7 +6,6 @@ extern void haskell_gdextension_init(
     GDExtensionClassLibraryPtr p_library,
     GDExtensionInitialization *r_initialization
 );
-
 
 GDExtensionBool GDE_EXPORT godot_haskell_entry(
     GDExtensionInterfaceGetProcAddress p_get_proc_address,
