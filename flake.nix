@@ -65,6 +65,7 @@
               drv:
               pkgs.haskell.lib.addBuildTools drv ([
                 # Build tools
+                pkgs.just
                 pkgs.haskellPackages.stack
                 pkgs.haskellPackages.hsc2hs
 

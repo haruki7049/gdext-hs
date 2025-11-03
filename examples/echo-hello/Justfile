@@ -1,0 +1,4 @@
+[working-directory: "haskell"]
+build:
+    stack build
+    cp {{shell("cd haskell; stack path --local-install-root")}}/lib/libecho-hello-plugin.so ../godot/bin/linux/

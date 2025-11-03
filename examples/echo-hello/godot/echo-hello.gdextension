@@ -1,0 +1,6 @@
+[configuration]
+entry_symbol = "godot_haskell_entry"
+compatibility_minimum = "4.5"
+
+[libraries]
+linux.64 = "res://"
