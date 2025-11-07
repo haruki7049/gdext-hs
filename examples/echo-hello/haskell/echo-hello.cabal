@@ -12,6 +12,7 @@ common warnings
 foreign-library echo-hello-plugin
   import:           warnings
   type:             native-shared
+  other-modules:    FLib
   hs-source-dirs:   ffi/flib
   build-depends:    base
   c-sources:        ffi/cbits/flib.c
