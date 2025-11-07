@@ -1,10 +1,10 @@
-cabal-version:      3.0
-name:               echo-hello
-version:            0.1.0.0
-license:            MIT
-author:             haruki7049
-maintainer:         tontonkirikiri@gmail.com
-build-type:         Simple
+cabal-version: 3.0
+name:          echo-hello
+version:       0.1.0.0
+license:       MIT
+author:        haruki7049
+maintainer:    tontonkirikiri@gmail.com
+build-type:    Simple
 
 common warnings
   ghc-options: -Wall

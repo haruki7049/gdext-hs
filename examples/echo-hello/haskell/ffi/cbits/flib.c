@@ -15,8 +15,8 @@ static void flib_fini() { hs_exit(); }
 
 extern void
 haskellGDExtensionInit(GDExtensionInterfaceGetProcAddress p_get_proc_address,
-                         GDExtensionClassLibraryPtr p_library,
-                         GDExtensionInitialization *r_initialization);
+                       GDExtensionClassLibraryPtr p_library,
+                       GDExtensionInitialization *r_initialization);
 
 GDExtensionBool __attribute((visibility("default")))
 godot_haskell_entry(GDExtensionInterfaceGetProcAddress p_get_proc_address,
