@@ -1,7 +1,7 @@
 {-# LANGUAGE EmptyDataDecls #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module FLib (haskellGdextensionInit) where
+module FLib (haskellGDExtensionInit) where
 
 import Foreign.Ptr (Ptr)
 
@@ -17,17 +17,16 @@ type GDExtensionClassLibraryPtr = Ptr GDExtensionClassLibraryPtr_
 
 type GDExtensionInitialization = Ptr GDExtensionInitialization_
 
-haskellGdextensionInit ::
+haskellGDExtensionInit ::
   GDExtensionInterfaceGetProcAddress ->
   GDExtensionClassLibraryPtr ->
   GDExtensionInitialization ->
   IO ()
-haskellGdextensionInit p_get_proc_address p_library r_initialization = do
-  putStrLn "[HASKELL] 'haskellGdextensionInit' CALLED! The FFI bridge is working."
+haskellGDExtensionInit p_get_proc_address p_library r_initialization = do
+  putStrLn "[HASKELL] 'haskellGDExtensionInit' CALLED! The FFI bridge is working."
   return ()
 
-foreign export ccall "haskell_gdextension_init"
-  haskellGdextensionInit ::
+foreign export ccall haskellGDExtensionInit ::
     GDExtensionInterfaceGetProcAddress ->
     GDExtensionClassLibraryPtr ->
     GDExtensionInitialization ->
