@@ -5,7 +5,6 @@ license:            MIT
 author:             haruki7049
 maintainer:         tontonkirikiri@gmail.com
 build-type:         Simple
-extra-source-files: gdextension/gdextension_interface.h
 
 common warnings
   ghc-options: -Wall
