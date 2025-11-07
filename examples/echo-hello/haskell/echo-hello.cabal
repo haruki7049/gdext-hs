@@ -13,9 +13,9 @@ common warnings
 foreign-library echo-hello-plugin
   import:           warnings
   type:             native-shared
-  hs-source-dirs:   src
+  hs-source-dirs:   ffi/flib
   build-depends:    base
-  c-sources:        cbits/flib.c
+  c-sources:        ffi/cbits/flib.c
   include-dirs:     gdextension
   ghc-options:      -fPIC -threaded
   extra-libraries:  dl

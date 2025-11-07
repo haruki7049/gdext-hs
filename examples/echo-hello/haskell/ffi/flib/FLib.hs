@@ -1,7 +1,7 @@
 {-# LANGUAGE EmptyDataDecls #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module Plugin (haskellGdextensionInit) where
+module FLib (haskellGdextensionInit) where
 
 import Foreign.Ptr (Ptr)
 
