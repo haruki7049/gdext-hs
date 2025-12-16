@@ -7,6 +7,7 @@ module FLib (haskellGDExtensionInit) where
 import Foreign.C.Types (CInt (..))
 import Foreign.Ptr (FunPtr, Ptr, nullPtr)
 import Foreign.Storable (pokeByteOff)
+import qualified Game as G
 
 -- 1. Define Haskell types for the callback functions
 -- Matches GDExtensionInitializeCallback signature in gdextension_interface.h
@@ -19,10 +20,12 @@ type GDExtensionDeinitializeCallback = Ptr () -> CInt -> IO ()
 initializeCallback :: Ptr () -> CInt -> IO ()
 initializeCallback _userdata level = do
   putStrLn $ "[HASKELL] Initialize callback called for level: " ++ show level
+  G.initialize (fromIntegral level)
 
 deinitializeCallback :: Ptr () -> CInt -> IO ()
 deinitializeCallback _userdata level = do
   putStrLn $ "[HASKELL] De-initialize callback called for level: " ++ show level
+  G.deinitialize (fromIntegral level)
 
 -- 3. 'foreign export' the Haskell functions to make them callable from C
 foreign export ccall initializeCallback :: GDExtensionInitializeCallback
