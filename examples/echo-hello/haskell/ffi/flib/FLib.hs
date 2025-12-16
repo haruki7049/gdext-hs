@@ -17,11 +17,11 @@ type GDExtensionDeinitializeCallback = Ptr () -> CInt -> IO ()
 
 -- 2. Implement the callback functions in Haskell (to be called by Godot)
 initializeCallback :: Ptr () -> CInt -> IO ()
-initializeCallback userdata level = do
+initializeCallback _userdata level = do
   putStrLn $ "[HASKELL] Initialize callback called for level: " ++ show level
 
 deinitializeCallback :: Ptr () -> CInt -> IO ()
-deinitializeCallback userdata level = do
+deinitializeCallback _userdata level = do
   putStrLn $ "[HASKELL] De-initialize callback called for level: " ++ show level
 
 -- 3. 'foreign export' the Haskell functions to make them callable from C
@@ -55,7 +55,7 @@ haskellGDExtensionInit ::
   GDExtensionClassLibraryPtr ->
   GDExtensionInitialization ->
   IO ()
-haskellGDExtensionInit p_get_proc_address p_library r_initialization = do
+haskellGDExtensionInit _p_get_proc_address _p_library r_initialization = do
   putStrLn "[HASKELL] 'haskellGDExtensionInit' CALLED! FFI bridge is working."
 
   -- Get the function pointers (FunPtr) to the Haskell callbacks
