@@ -3,14 +3,16 @@
 
 module FLib (haskellGDExtensionInit) where
 
+-- Used to write values to the struct
+import Foreign.C.Types (CInt (..))
 import Foreign.Ptr (FunPtr, Ptr, nullPtr)
-import Foreign.Storable (pokeByteOff) -- Used to write values to the struct
-import Foreign.C.Types (CInt(..))
+import Foreign.Storable (pokeByteOff)
 
 -- 1. Define Haskell types for the callback functions
 -- Matches GDExtensionInitializeCallback signature in gdextension_interface.h
 -- void (*)(void *p_userdata, GDExtensionInitializationLevel p_level);
 type GDExtensionInitializeCallback = Ptr () -> CInt -> IO ()
+
 type GDExtensionDeinitializeCallback = Ptr () -> CInt -> IO ()
 
 -- 2. Implement the callback functions in Haskell (to be called by Godot)
@@ -24,6 +26,7 @@ deinitializeCallback userdata level = do
 
 -- 3. 'foreign export' the Haskell functions to make them callable from C
 foreign export ccall initializeCallback :: GDExtensionInitializeCallback
+
 foreign export ccall deinitializeCallback :: GDExtensionDeinitializeCallback
 
 -- 4. Wrappers to get the function pointer (FunPtr) of the exported functions
@@ -35,11 +38,15 @@ foreign import ccall "wrapper"
 
 -- (Existing type definitions)
 data GDExtensionInterfaceGetProcAddress_
+
 data GDExtensionClassLibraryPtr_
+
 data GDExtensionInitialization_ -- Type for Ptr GDExtensionInitialization_
 
 type GDExtensionInterfaceGetProcAddress = Ptr GDExtensionInterfaceGetProcAddress_
+
 type GDExtensionClassLibraryPtr = Ptr GDExtensionClassLibraryPtr_
+
 type GDExtensionInitialization = Ptr GDExtensionInitialization_ -- Equivalent to C's GDExtensionInitialization*
 
 -- 5. Modify the main initialization function
@@ -57,7 +64,7 @@ haskellGDExtensionInit p_get_proc_address p_library r_initialization = do
 
   -- Write values into the memory pointed to by 'r_initialization' (passed from C),
   -- following the layout of the GDExtensionInitialization struct.
-  
+
   -- NOTE: Offsets are hardcoded assuming a 64-bit Linux environment.
   -- Layout: CInt (4 bytes), 4 bytes padding, Ptr (8 bytes), FunPtr (8 bytes), FunPtr (8 bytes)
   -- A proper Storable instance should be defined ideally, but using pokeByteOff for this minimal example.
@@ -69,13 +76,13 @@ haskellGDExtensionInit p_get_proc_address p_library r_initialization = do
 
   -- Field 1: minimum_initialization_level = GDEXTENSION_INITIALIZATION_CORE (0)
   pokeByteOff r_initialization offset_level (0 :: CInt)
-  
+
   -- Field 2: userdata = NULL
   pokeByteOff r_initialization offset_userdata nullPtr
-  
+
   -- Field 3: initialize = &initializeCallback
   pokeByteOff r_initialization offset_init initFunPtr
-  
+
   -- Field 4: deinitialize = &deinitializeCallback
   pokeByteOff r_initialization offset_deinit deinitFunPtr
 
